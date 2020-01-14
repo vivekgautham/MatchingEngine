@@ -1,0 +1,12 @@
+Performance characteristics: 
+
+We use std::set is an associative container that contains a sorted set of unique objects of type Key (OrderID). 
+It internally uses RB Trees (Red-Black Trees) which are self-balancing binary search tree.
+
+Insertion and Removal have logarithmic complexity - log(n).
+
+Interestingly, Determining whether an AddOrderRequest results in a match - takes a constant time as we just 
+have to look at start/end of sells/buys set of the OrderBook becuase std::set is a sorted container. 
+After we determine there is a match, we insert the order which is partially fullfilled into buys/sells set of the OrderBook.
+
+CancelOrderRequest is essentially Removal which is log(n) complexity.
